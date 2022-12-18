@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import 'ngx-toastr/toastr';
+
+:root {
+  --primary: #3f72af; /* blue */
+  --secondary: #c0c3c9; /* gray */
+  --light: #f9f7f7; /* white */
+  --dark: #112d4e; /* black */
+  --red: #dc3545; /* red */
+}
+
+.btn-submit {
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--dark) !important;
+  font-size: 18px;
+  color: var(--light) !important;
+  font-weight: 700;
+  outline: none;
+}
+.btn-submit:hover {
+  border-color: var(--primary);
+  transition: 0.5s;
+}
+.btn-submit-close {
+  @extend .btn-submit;
+  background: var(--red) !important;
+}
+.form-label {
+  padding-right: 5px;
+}
+/*** start overflow Scroll ***/
+.overflowScroll {
+  height: 64vh;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #eef0f9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b3b0b0;
+}
+/*** End  overflow Scroll ***/
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
