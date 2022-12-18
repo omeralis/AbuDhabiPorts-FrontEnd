@@ -110,35 +110,35 @@ export class EmployeesComponent implements OnInit {
     if (this.myForm.value.id) {
       this.employeeService
         .UpdateEmployees(this.myForm.value.id, this.myForm.value)
-        .subscribe(
-          (res) => {
+        .subscribe({
+          next: (res) => {
             this.isLoading = false;
           },
-          (error) => {
+          error: (error) => {
             console.log('error update Employee', error);
             this.isLoading = false;
           },
-          () => {
+          complete: () => {
             this.toastr.success('Updated Successfully ', 'Employee');
             this.getEmployeea();
             this.modalService.dismissAll('Cross click');
             this.isLoading = false;
-          }
-        );
+          },
+        });
     } else {
-      this.employeeService.addEmployees(this.myForm.value).subscribe(
-        (res) => {},
-        (error) => {
+      this.employeeService.addEmployees(this.myForm.value).subscribe({
+        next: (res) => {},
+        error: (error) => {
           console.log(error);
           this.isLoading = false;
         },
-        () => {
+        complete: () => {
           this.toastr.success('Add Employee success ');
           this.getEmployeea();
           this.modalService.dismissAll('Cross click');
           this.isLoading = false;
-        }
-      );
+        },
+      });
     }
   }
 
@@ -151,15 +151,15 @@ export class EmployeesComponent implements OnInit {
     });
   }
   RemoveEmployee(data: any) {
-    this.employeeService.DeleteEmployees(data.id).subscribe(
-      (res) => {},
-      (error) => {
+    this.employeeService.DeleteEmployees(data.id).subscribe({
+      next: (res) => {},
+      error: (error) => {
         console.log(error);
       },
-      () => {
+      complete: () => {
         this.toastr.success('Remove Employee success ');
         this.getEmployeea();
-      }
-    );
+      },
+    });
   }
 }

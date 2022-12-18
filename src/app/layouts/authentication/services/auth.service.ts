@@ -20,7 +20,7 @@ export class AuthService {
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
   dataPhone: any;
-
+  isLoading = false;
   isLoggedIn = new BehaviorSubject<boolean>(this.tokenAvailable());
 
   constructor(
@@ -29,24 +29,12 @@ export class AuthService {
     private toastr: ToastrService
   ) {}
 
-  // Sign-in 
+  // Sign-in
   signIn(user: User) {
+    this.isLoading =false;
+    console.log(this.isLoading)
     return this.http
-      .post<any>(this.endpoint + ApiRoutes.login, user)
-      .subscribe({
-        next: (res: any) => {
-          console.log(res.token);
-          localStorage.setItem('access_token', res.token);
-          this.setIsLoggedIn(true);
-          this.router.navigate(['employees']);
-          this.currentUser = res.token;
-        },
-        error: (error) => {
-          console.log(error);
-          this.toastr.error('Invalid username and Password');
-        },
-        complete: () => {},
-      });
+      .post<any>(this.endpoint + ApiRoutes.login, user);
   }
 
   // logout
