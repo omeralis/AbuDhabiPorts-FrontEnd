@@ -11,7 +11,8 @@
 .form-group {
   margin-top: 0.5rem;
 }
-.loader{
+
+.loader {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -23,6 +24,12 @@
   justify-content: center;
   background: white;
 }
+
+.spinner-grow {
+  width: 5rem;
+  height: 5rem;
+}
+
 .red {
   color: red;
 }
