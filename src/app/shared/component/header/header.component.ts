@@ -4,14 +4,12 @@ import { AuthService } from 'src/app/layouts/authentication/services/auth.servic
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  constructor(public authService: AuthService) {}
 
-  constructor(public authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   logout() {
     this.authService.doLogout();
   }

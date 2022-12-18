@@ -23,10 +23,13 @@ export class AuthService {
 
   isLoggedIn = new BehaviorSubject<boolean>(this.tokenAvailable());
 
-  constructor(private http: HttpClient, public router: Router,
-    private toastr: ToastrService) {}
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    private toastr: ToastrService
+  ) {}
 
-  // Sign-in from Email
+  // Sign-in 
   signIn(user: User) {
     return this.http
       .post<any>(this.endpoint + ApiRoutes.login, user)
@@ -34,7 +37,7 @@ export class AuthService {
         next: (res: any) => {
           console.log(res.token);
           localStorage.setItem('access_token', res.token);
-          this.setIsLoggedIn(true); 
+          this.setIsLoggedIn(true);
           this.router.navigate(['employees']);
           this.currentUser = res.token;
         },
@@ -65,6 +68,7 @@ export class AuthService {
   getIsLoggedIn(): BehaviorSubject<boolean> {
     return this.isLoggedIn;
   }
+  // get Token
   getToken() {
     return localStorage.getItem('access_token');
   }

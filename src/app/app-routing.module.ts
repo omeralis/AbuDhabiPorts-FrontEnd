@@ -5,14 +5,26 @@ import { LoggedInAuthGuard } from './shared/helpers/guard/LoggedInAuthGuard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', loadChildren: () => import('./layouts/authentication/authentication.module').then(m => m.AuthenticationModule), canActivate: [LoggedInAuthGuard] },
-  { path: 'employees', loadChildren: () => import('./layouts/employees/employees.module').then(m => m.EmployeesModule), canActivate: [AuthGuard] },
-  
-]
-
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./layouts/authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+    canActivate: [LoggedInAuthGuard],
+  },
+  {
+    path: 'employees',
+    loadChildren: () =>
+      import('./layouts/employees/employees.module').then(
+        (m) => m.EmployeesModule
+      ),
+    canActivate: [AuthGuard],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

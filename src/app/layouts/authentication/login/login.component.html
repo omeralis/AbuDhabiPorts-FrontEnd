@@ -1,33 +1,33 @@
 <section>
-    <div class="box-card">
-      <h1>Login</h1>
-      <form [formGroup]="LoginForm" class="flex-centered flex-column">
-        <div class="txt_field">
-          <input type="text" formControlName="username" autocomplete="off" required />
-          <span></span>
-          <label>Username</label>
-          <div class="validation" *ngIf="submitted && loginForm.username.errors">
-            <small class="v-message" *ngIf="loginForm.username.errors.required">
-              User Name is required
-            </small>
-          </div>
+  <div class="box-card">
+    <h1>Login</h1>
+    <form [formGroup]="LoginForm" class="flex-centered flex-column">
+      <div class="txt_field">
+        <input type="text" formControlName="username" autocomplete="off" required />
+        <span></span>
+        <label>Username</label>
+        <div class="validation" *ngIf="submitted && loginForm.username.errors">
+          <small class="v-message" *ngIf="loginForm.username.errors.required">
+            User Name is required
+          </small>
         </div>
-        <div class="txt_field">
-          <input type="password" formControlName="password" autocomplete="off" required />
-          <span></span>
-          <label>Password</label>
-          <div class="validation" *ngIf="submitted && loginForm.password.errors">
-            <small class="v-message" *ngIf="loginForm.password.errors.required">
-              Password is required
-            </small>
-          </div>
+      </div>
+      <div class="txt_field">
+        <input type="password" formControlName="password" autocomplete="off" required />
+        <span></span>
+        <label>Password</label>
+        <div class="validation" *ngIf="submitted && loginForm.password.errors">
+          <small class="v-message" *ngIf="loginForm.password.errors.required">
+            Password is required
+          </small>
         </div>
-        <button type="submit" value="Login" (click)="login()" class="btn btn-login">
-          <span>
-            <span *ngIf="isLoading" class="spinner-border spinner-border-sm text-light" role="status"></span>
-            Login
-          </span>
-        </button>
-      </form>
-    </div>
-  </section>
+      </div>
+      <button type="submit" value="Login" (click)="login()" class="btn btn-login">
+        <span>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm text-light" role="status"></span>
+          Login
+        </span>
+      </button>
+    </form>
+  </div>
+</section>

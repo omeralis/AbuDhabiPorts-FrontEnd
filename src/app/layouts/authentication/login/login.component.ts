@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   LoginForm: FormGroup;
@@ -14,15 +14,14 @@ export class LoginComponent implements OnInit {
   submitted = false;
   isLoading = false;
 
-  constructor(public fb: FormBuilder,private authService: AuthService) { 
+  constructor(public fb: FormBuilder, private authService: AuthService) {
     this.LoginForm = this.fb.group({
-      username: ["", Validators.required],
-      password: ["", Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   login() {
     this.isLoading = true;
     this.submitted = true;
@@ -34,8 +33,8 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(this.LoginForm.value);
     this.isLoading = false;
   }
-    // validation 
-    get loginForm(): any {
-      return this.LoginForm.controls;
-    }
+  // validation
+  get loginForm(): any {
+    return this.LoginForm.controls;
+  }
 }

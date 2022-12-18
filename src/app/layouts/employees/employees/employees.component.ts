@@ -19,7 +19,7 @@ export class EmployeesComponent implements OnInit {
   myForm: FormGroup = this.fb.group({});
   submitted: boolean = false;
   isLoading: boolean = false;
-
+  isLoadering: boolean = false;
   constructor(
     private employeeService: EmployeesService,
     private modalService: NgbModal,
@@ -40,18 +40,28 @@ export class EmployeesComponent implements OnInit {
       jobTitle: ['', Validators.required],
       gender: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
-      salary: ['', Validators.required],
+      salary: [Number, Validators.required],
       address: ['', Validators.required],
     });
   }
   // get data of Employee
   getEmployeea() {
+    this.isLoadering = true;
+    console.log('init loading', this.isLoadering);
     this.employeeService.getEmployees().subscribe(
       (res: any) => {
         this.DataResponse = res;
+        this.isLoadering = false;
+        console.log('res loading', this.isLoadering);
       },
       (err) => {
         console.log(err);
+        this.isLoadering = false;
+        console.log('err loading', this.isLoadering);
+      },
+      () => {
+        this.isLoadering = false;
+        console.log('com loading', this.isLoadering);
       }
     );
   }
@@ -106,53 +116,50 @@ export class EmployeesComponent implements OnInit {
           },
           (error) => {
             console.log('error update Employee', error);
+            this.isLoading = false;
           },
           () => {
             this.toastr.success('Updated Successfully ', 'Employee');
             this.getEmployeea();
             this.modalService.dismissAll('Cross click');
+            this.isLoading = false;
           }
         );
     } else {
       this.employeeService.addEmployees(this.myForm.value).subscribe(
-        (res) => {
-        },
+        (res) => {},
         (error) => {
           console.log(error);
+          this.isLoading = false;
         },
         () => {
           this.toastr.success('Add Employee success ');
           this.getEmployeea();
           this.modalService.dismissAll('Cross click');
+          this.isLoading = false;
         }
       );
     }
-
-    this.isLoading = false;
   }
 
-  confirm(data:any) {
+  confirm(data: any) {
     this.confirmationService.confirm({
-        message: 'Are you sure delete that Employee ?',
-        accept: () => {
-          this.RemoveEmployee(data)
-        }
+      message: 'Are you sure delete that Employee ?',
+      accept: () => {
+        this.RemoveEmployee(data);
+      },
     });
-}
-  RemoveEmployee(data:any){
+  }
+  RemoveEmployee(data: any) {
     this.employeeService.DeleteEmployees(data.id).subscribe(
-      (res)=>{
+      (res) => {},
+      (error) => {
+        console.log(error);
       },
-      (error)=>{
-        console.log(error)
-      },
-      ()=>{
+      () => {
         this.toastr.success('Remove Employee success ');
         this.getEmployeea();
       }
-      
-      )
-      
+    );
   }
-  
 }

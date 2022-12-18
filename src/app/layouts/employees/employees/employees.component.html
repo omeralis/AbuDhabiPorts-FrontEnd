@@ -1,167 +1,140 @@
 <section>
-    <div class="container">
-      <!-- ------------------------------- Title and Button  -------------------- -->
-      <div class="d-flex justify-content-between">
-        <div class="d-flex align-items-center">
-          <h3 class="font-primary-color">List of Employees</h3>
-        </div>
-        <div class="flex-container d-flex">
-          <div
-            class="icon-size shadow-0 flex-centered m-1"
-            placement="top"
-            ngbTooltip="Add New Case"
-          >
-            <button
-              class="btn btn-submit mr-2"
-              (click)="open(content)"
-              style="font-weight: bold"
-            >
-              <span class="navi-icon">
-                <fa-icon icon="plus"></fa-icon>
-              </span>
-            </button>
-          </div>
-        </div>
+  <div class="container">
+    <!-- ------------------------------- Title and Button  -------------------- -->
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <h3 class="font-primary-color">List of Employees</h3>
       </div>
-      <!-- ------------------------------- Table List Data  --------------------- -->
-      <div class="content-table mt-2">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Job Title</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Date Of Birth</th>
-              <th scope="col">Salary</th>
-              <th scope="col">Address</th>
-              <th scope="col" class="text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let Data of DataResponse; let i = index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ Data.fullName }}</td>
-              <td>{{ Data.jobTitle }}</td>
-              <td>{{ Data.gender }}</td>
-              <td>{{ Data.dateOfBirth }}</td>
-              <td>{{ Data.salary  | number : '1.2-2'}}</td>
-              <td>{{ Data.address }}</td>
-              <td>
-                <div class="d-flex justify-content-around text-center">
-                  <fa-icon icon="edit" (click)="openEdit(Data)"></fa-icon>
-                  <fa-icon icon="trash" class="red" (click)="confirm(Data)"></fa-icon>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="flex-container d-flex">
+        <div class="icon-size shadow-0 flex-centered m-1" placement="top" ngbTooltip="Add New Case">
+          <button class="btn btn-submit mr-2" (click)="open(content)" style="font-weight: bold">
+            <span class="navi-icon">
+              <fa-icon icon="plus"></fa-icon>
+            </span>
+          </button>
+        </div>
       </div>
     </div>
-    <!-- ------------- add new and Edit Case from dynamically json form -------- -->
-    <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">{{ titleModel }}</h4>
-        <button
-          type="button"
-          class="btn-close"
-          aria-label="Close"
-          (click)="modal.dismiss('Cross click')"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-              <div class="row">
-                <input type="text" formControlName="id" hidden />
-                <div class="form-group">
-                    <label> Name<span class="required">*</span></label>
-                    <input type="text" formControlName="fullName" class="form-control"
-                       [ngClass]="{ 'is-invalid': submitted && submittedValid['fullName'].errors }"
-                       autocomplete="off" />
-                    <div *ngIf="submitted && submittedValid['fullName'].errors" class="invalid-feedback">
-                       <div *ngIf="submittedValid['fullName'].errors['required']"> Name is required</div>
-                    </div>
-                 </div>
-                 <div class="form-group">
-                    <label> Job Title<span class="required">*</span></label>
-                    <input type="text" formControlName="jobTitle" class="form-control"
-                       [ngClass]="{ 'is-invalid': submitted && submittedValid['jobTitle'].errors }"
-                       autocomplete="off" />
-                    <div *ngIf="submitted && submittedValid['jobTitle'].errors" class="invalid-feedback">
-                       <div *ngIf="submittedValid['jobTitle'].errors['required']"> job Title is required</div>
-                    </div>
-                 </div>
-                 <div class="form-group">
-                    <label> Gender<span class="required">*</span></label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio1" value="male"
-                        [ngClass]="{ 'is-invalid': submitted && submittedValid['gender'].errors }"
-                        >
-                        <label class="form-check-label" for="inlineRadio1">Male</label>
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio2" value="female"
-                        [ngClass]="{ 'is-invalid': submitted && submittedValid['gender'].errors }"
-                        >
-                        <label class="form-check-label" for="inlineRadio2">Female</label>
-                      </div>
-                 </div>
-                 <div class="form-group">
-                    <label> Date Of Birth<span class="required">*</span></label>
-                    <p-calendar
-                    [showTime]="true"
-                    dateFormat="dd-M-yy"
-                    inputId="dateOfBirth"
-                    formControlName="dateOfBirth"
-                    [ngClass]="{ 'is-invalid': submitted && submittedValid['dateOfBirth'].errors }"
-                    ></p-calendar>
-                    <!-- <p-calendar formControlName="dateOfBirth" appendTo=""
-
-                    [ngClass]="{ 'is-invalid': submitted && submittedValid['dateOfBirth'].errors }"
-                    ></p-calendar> -->
-                    <!-- <input type="date" formControlName="dateOfBirth" class="form-control"
-                       [ngClass]="{ 'is-invalid': submitted && submittedValid['dateOfBirth'].errors }"
-                       autocomplete="off" /> -->
-                    <div *ngIf="submitted && submittedValid['dateOfBirth'].errors" class="invalid-feedback">
-                       <div *ngIf="submittedValid['dateOfBirth'].errors['required']"> Date Of Birth is required</div>
-                    </div>
-                 </div>
-                 <div class="form-group">
-                    <label> Salary<span class="required">*</span></label>
-                    <input type="text" formControlName="salary" class="form-control"
-                       [ngClass]="{ 'is-invalid': submitted && submittedValid['salary'].errors }"
-                       autocomplete="off" />
-                    <div *ngIf="submitted && submittedValid['salary'].errors" class="invalid-feedback">
-                       <div *ngIf="submittedValid['salary'].errors['required']"> Salary is required</div>
-                    </div>
-                 </div>
-                 <div class="form-group">
-                    <label> address<span class="required">*</span></label>
-                    <textarea formControlName="address" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && submittedValid['address'].errors }"
-                    autocomplete="off" 
-                    ></textarea>
-                    <div *ngIf="submitted && submittedValid['address'].errors" class="invalid-feedback">
-                       <div *ngIf="submittedValid['address'].errors['required']"> Address is required</div>
-                    </div>
-                 </div>
+    <!-- ------------------------------- Table List Data  --------------------- -->
+    <div class="content-table mt-2">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Date Of Birth</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Address</th>
+            <th scope="col" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Data of DataResponse; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ Data.fullName }}</td>
+            <td>{{ Data.jobTitle }}</td>
+            <td>{{ Data.gender }}</td>
+            <td>{{ Data.dateOfBirth }}</td>
+            <td>{{ Data.salary | number : '1.2-2'}}</td>
+            <td>{{ Data.address }}</td>
+            <td>
+              <div class="d-flex justify-content-around text-center">
+                <fa-icon icon="edit" (click)="openEdit(Data)"></fa-icon>
+                <fa-icon icon="trash" class="red" (click)="confirm(Data)"></fa-icon>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- ------------- add new and Edit Case from dynamically json form -------- -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{ titleModel }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <div class="row">
+            <input type="text" formControlName="id" hidden />
+            <div class="form-group">
+              <label> Name<span class="required">*</span></label>
+              <input type="text" formControlName="fullName" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && submittedValid['fullName'].errors }" autocomplete="off" />
+              <div *ngIf="submitted && submittedValid['fullName'].errors" class="invalid-feedback">
+                <div *ngIf="submittedValid['fullName'].errors['required']"> Name is required</div>
               </div>
             </div>
-            <div class="d-flex justify-content-between">
-              <button type="button" class="btn btn-submit-close" (click)="colesModel()">
-                close
-              </button>
-              <button expand="full" type="submit" class="btn btn-submit">
-                Save
-                <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-light" role="status"></div>
-              </button>
+            <div class="form-group">
+              <label> Job Title<span class="required">*</span></label>
+              <input type="text" formControlName="jobTitle" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && submittedValid['jobTitle'].errors }" autocomplete="off" />
+              <div *ngIf="submitted && submittedValid['jobTitle'].errors" class="invalid-feedback">
+                <div *ngIf="submittedValid['jobTitle'].errors['required']"> job Title is required</div>
+              </div>
             </div>
-          </form>
-      </div>
-    </ng-template>
-    <p-confirmDialog  header="Delete Employee" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text" acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
+            <div class="form-group">
+              <label> Gender<span class="required">*</span></label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio1" value="male"
+                  [ngClass]="{ 'is-invalid': submitted && submittedValid['gender'].errors }">
+                <label class="form-check-label" for="inlineRadio1">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="gender" id="inlineRadio2" value="female"
+                  [ngClass]="{ 'is-invalid': submitted && submittedValid['gender'].errors }">
+                <label class="form-check-label" for="inlineRadio2">Female</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label> Date Of Birth<span class="required">*</span></label>
+              <p-calendar [showTime]="true" dateFormat="dd-M-yy" inputId="dateOfBirth" formControlName="dateOfBirth"
+                [ngClass]="{ 'is-invalid': submitted && submittedValid['dateOfBirth'].errors }"></p-calendar>
+              <div *ngIf="submitted && submittedValid['dateOfBirth'].errors" class="invalid-feedback">
+                <div *ngIf="submittedValid['dateOfBirth'].errors['required']"> Date Of Birth is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label> Salary<span class="required">*</span></label>
+              <input type="number" formControlName="salary" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && submittedValid['salary'].errors }" autocomplete="off" />
+              <div *ngIf="submitted && submittedValid['salary'].errors" class="invalid-feedback">
+                <div *ngIf="submittedValid['salary'].errors['required']"> Salary is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label> address<span class="required">*</span></label>
+              <textarea formControlName="address" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && submittedValid['address'].errors }"
+                autocomplete="off"></textarea>
+              <div *ngIf="submitted && submittedValid['address'].errors" class="invalid-feedback">
+                <div *ngIf="submittedValid['address'].errors['required']"> Address is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-submit-close" (click)="colesModel()">
+            close
+          </button>
+          <button expand="full" type="submit" class="btn btn-submit">
+            Save
+            <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-light" role="status"></div>
+          </button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+  <p-confirmDialog header="Delete Employee" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"
+    acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
+</section>
 
-    <!-- <p-confirmDialog header="Delete Employee" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
-  </section>
-  
+<div *ngIf="isLoadering"  class="loader">
+  <div class="spinner-grow text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>

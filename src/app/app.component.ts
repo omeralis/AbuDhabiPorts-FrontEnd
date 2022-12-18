@@ -6,21 +6,25 @@ import { AuthService } from './layouts/authentication/services/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'AbuDhabiPorts-FrontEnd';
   isLoggedIn: boolean = false;
-  constructor(public authService: AuthService,  public fb: FormBuilder,public router: Router) {}
+  constructor(
+    public authService: AuthService,
+    public fb: FormBuilder,
+    public router: Router
+  ) {}
   ngOnInit(): void {
     this.getIsLoggedIn();
   }
 
   getIsLoggedIn() {
-    this.authService.getIsLoggedIn().subscribe(res => {
-      if(res){
+    this.authService.getIsLoggedIn().subscribe((res) => {
+      if (res) {
         this.isLoggedIn = true;
-      }else{
+      } else {
         this.isLoggedIn = false;
       }
     });

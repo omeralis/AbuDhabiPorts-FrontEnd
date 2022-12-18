@@ -1,9 +1,9 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   FontAwesomeModule,
   FaIconLibrary,
-} from "@fortawesome/angular-fontawesome";
+} from '@fortawesome/angular-fontawesome';
 
 import {
   faTrash,
@@ -11,34 +11,11 @@ import {
   faEdit,
   faEyeSlash,
   faEye,
-  faSearch,
-  faArrowAltCircleLeft,
-  faListUl,
-  faTh,
-  faUser,
-  faClock,
-  faEnvelope,
-  faMobileAlt,
-  faUpload,
-  faBell,
-  faCar,
-  faFileArchive,
-  faFile,
-  faPrint,
   faPlus,
-  faPen,
-  faTimes,
-  faLocationArrow,
-  faInfoCircle,
-  faShoppingCart,
-  faSignInAlt,
-  faCheck,
-  faLayerGroup,
   faHome,
   faUserFriends,
   faUsers,
-  faInfo
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [],
@@ -52,34 +29,11 @@ export class IconsModule {
       faSave,
       faEdit,
       faEyeSlash,
-      faEye,
-      faSearch,
-      faArrowAltCircleLeft,
-      faListUl,
-      faTh,
-      faUser,
-      faClock,
-      faEnvelope,
-      faMobileAlt,
-      faUpload,
-      faBell,
-      faCar,
-      faFileArchive,
-      faFile,
-      faPrint,
       faPlus,
-      faPen,
-      faTimes,
-      faLocationArrow,
-      faInfoCircle,
-      faShoppingCart,
-      faSignInAlt,
-      faCheck,
-      faLayerGroup,
+      faEye,
       faHome,
       faUserFriends,
-      faUsers,
-      faInfo
+      faUsers
     );
   }
 }
