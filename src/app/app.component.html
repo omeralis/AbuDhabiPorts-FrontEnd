@@ -1,9 +1,5 @@
-<div *ngIf="!isLoggedIn; then login; else layout"></div>
-<ng-template #login>
-  <router-outlet></router-outlet>
-</ng-template>
 
-<ng-template #layout>
+<ng-template>
   <div class="pages container-fluid p-0">
     <div class="header-nav">
       <app-header></app-header>
